@@ -6,6 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#00f5d4" />
+    <link rel="manifest" href="manifest.json" />
     <title>UNLOCK</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap"
@@ -145,6 +149,8 @@
         letter-spacing: 8px;
         background: linear-gradient(90deg, var(--acc), var(--ac2));
         -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
         -webkit-text-fill-color: transparent;
       }
       .h-sub {
