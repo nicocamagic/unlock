@@ -91,6 +91,12 @@
         position: relative;
         z-index: 5;
       }
+      #s-pin .sbar,
+      #s-patron .sbar,
+      #s-password .sbar,
+      #s-emg .sbar {
+        display: none;
+      }
 
       /* ════ HOME ════ */
       #s-home {
@@ -364,30 +370,13 @@
       .lk-bg {
         position: absolute;
         inset: 0;
-        background: var(
-          --wall,
-          linear-gradient(160deg, #0d0d1a 0%, #1a0a2e 50%, #0a1a1a 100%)
-        );
+        background: var(--wall, #000);
         background-size: cover;
         background-position: center;
         z-index: 0;
       }
       .lk-gl {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        background:
-          radial-gradient(
-            ellipse at 30% 20%,
-            rgba(123, 45, 255, 0.25) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            ellipse at 70% 80%,
-            rgba(0, 245, 212, 0.15) 0%,
-            transparent 50%
-          );
+        display: none;
       }
       /* Inicio button in flow (not absolute) */
       .lk-home-row {
@@ -428,18 +417,22 @@
       }
       .lk-time {
         font-family: "Orbitron", monospace;
-        font-size: clamp(32px, 7vh, 54px);
+        font-size: clamp(36px, 8vh, 60px);
         font-weight: 900;
-        color: #fff;
-        letter-spacing: 4px;
-        line-height: 1;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+        color: #f8fbff;
+        letter-spacing: 0.18em;
+        line-height: 1.03;
+        text-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.28),
+          0 6px 18px rgba(0, 0, 0, 0.34),
+          0 0 24px rgba(255, 255, 255, 0.12);
       }
       .lk-date {
         font-size: clamp(9px, 1.5vh, 13px);
-        color: rgba(255, 255, 255, 0.55);
-        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.72);
+        letter-spacing: 0.24em;
         text-transform: uppercase;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
       }
       .lk-hint {
         font-size: clamp(10px, 1.6vh, 13px);
@@ -597,30 +590,77 @@
         height: 100%;
       }
       .pn {
-        background: rgba(255, 255, 255, 0.08);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
+        background: transparent;
+        border: none;
+        border-radius: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.12s;
+        box-shadow: none;
       }
       .pn.on {
-        background: rgba(0, 245, 212, 0.3);
-        border-color: var(--acc);
-        box-shadow: 0 0 14px rgba(0, 245, 212, 0.5);
+        background: transparent;
+        border: none;
+        box-shadow: none;
       }
       .pd {
-        width: 10px;
-        height: 10px;
+        width: clamp(8px, 2.2vw, 12px);
+        height: clamp(8px, 2.2vw, 12px);
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.4);
         transition: all 0.12s;
       }
       .pn.on .pd {
         background: var(--acc);
-        box-shadow: 0 0 8px var(--acc);
+        border-color: var(--acc);
+        box-shadow: 0 0 10px rgba(0, 245, 212, 0.45), 0 0 0 6px rgba(0, 245, 212, 0.14);
+        transform: scale(1.08);
+      }
+
+      /* ── Pantallas de bloqueo: estilo Android real ── */
+      #s-pin .lk-hint,
+      #s-patron .lk-hint,
+      #s-password .lk-hint {
+        min-height: 14px;
+        font-size: 12px;
+        letter-spacing: 0.3px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      #s-pin .lk-bot,
+      #s-patron .lk-bot,
+      #s-password .lk-bot {
+        justify-content: center;
+        background: none;
+        padding: 0 28px clamp(14px, 3vh, 22px);
+      }
+      .lbb.emg-android {
+        flex-direction: row;
+        background: rgba(179, 224, 255, 0.9);
+        border-radius: 30px;
+        padding: 11px 24px;
+      }
+      .lbb.emg-android:active {
+        background: rgba(179, 224, 255, 0.7);
+      }
+      .lbb.emg-android .lbb-t {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-transform: none;
+        color: #1a2634;
+        font-family: "Rajdhani", sans-serif;
+      }
+      .lk-home-bar {
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+        width: 100px;
+        height: 4px;
+        margin: 0 auto clamp(8px, 1.6vh, 14px);
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.75);
       }
 
       /* Password */
@@ -1120,9 +1160,6 @@
             <span id="ck-pin">09:41</span
             ><span style="color: rgba(255, 255, 255, 0.6)">📶 🔋</span>
           </div>
-          <div class="lk-home-row">
-            <button class="lk-home" onclick="go('s-home')">⌂ Inicio</button>
-          </div>
           <div class="lk-top">
             <div class="lk-ico">🔒</div>
             <div class="lk-time" id="lt-pin">09:41</div>
@@ -1134,14 +1171,11 @@
             <div class="numpad" id="numpad"></div>
           </div>
           <div class="lk-bot">
-            <button class="lbb" onclick="goEmg('pin')">
-              <span class="lbb-i">📞</span><span class="lbb-t">Emergencia</span>
-            </button>
-            <div class="sl-hint"><span>↑</span><span>DESLIZA</span></div>
-            <button class="lbb">
-              <span class="lbb-i">📷</span><span class="lbb-t">Cámara</span>
+            <button class="lbb emg-android" onclick="goEmg('pin')">
+              <span class="lbb-t">Llamada de emergencia</span>
             </button>
           </div>
+          <div class="lk-home-bar"></div>
         </div>
 
         <!-- ══ LOCK PATRÓN ══ -->
@@ -1152,30 +1186,24 @@
             <span id="ck-pat">09:41</span
             ><span style="color: rgba(255, 255, 255, 0.6)">📶 🔋</span>
           </div>
-          <div class="lk-home-row">
-            <button class="lk-home" onclick="go('s-home')">⌂ Inicio</button>
-          </div>
           <div class="lk-top">
             <div class="lk-ico">🔒</div>
             <div class="lk-time" id="lt-pat">09:41</div>
             <div class="lk-date" id="ld-pat">Jueves, 5 de Marzo</div>
           </div>
           <div class="lk-ctr">
-            <div class="lk-hint" id="pat-hint">Dibuja tu patrón</div>
+            <div class="lk-hint" id="pat-hint"></div>
             <div class="pat-wrap">
               <canvas class="pat-cv" id="pat-cv"></canvas>
               <div class="pat-grid" id="pat-grid"></div>
             </div>
           </div>
           <div class="lk-bot">
-            <button class="lbb" onclick="goEmg('patron')">
-              <span class="lbb-i">📞</span><span class="lbb-t">Emergencia</span>
-            </button>
-            <div class="sl-hint"><span>↑</span><span>DESLIZA</span></div>
-            <button class="lbb">
-              <span class="lbb-i">📷</span><span class="lbb-t">Cámara</span>
+            <button class="lbb emg-android" onclick="goEmg('patron')">
+              <span class="lbb-t">Llamada de emergencia</span>
             </button>
           </div>
+          <div class="lk-home-bar"></div>
         </div>
 
         <!-- ══ LOCK CONTRASEÑA ══ -->
@@ -1185,9 +1213,6 @@
           <div class="sbar">
             <span id="ck-pw">09:41</span
             ><span style="color: rgba(255, 255, 255, 0.6)">📶 🔋</span>
-          </div>
-          <div class="lk-home-row">
-            <button class="lk-home" onclick="go('s-home')">⌂ Inicio</button>
           </div>
           <div class="lk-top">
             <div class="lk-ico">🔒</div>
@@ -1205,14 +1230,11 @@
             <button class="pw-sub" onclick="submitPw()">DESBLOQUEAR →</button>
           </div>
           <div class="lk-bot">
-            <button class="lbb" onclick="goEmg('password')">
-              <span class="lbb-i">📞</span><span class="lbb-t">Emergencia</span>
-            </button>
-            <div class="sl-hint"><span>↑</span><span>DESLIZA</span></div>
-            <button class="lbb">
-              <span class="lbb-i">📷</span><span class="lbb-t">Cámara</span>
+            <button class="lbb emg-android" onclick="goEmg('password')">
+              <span class="lbb-t">Llamada de emergencia</span>
             </button>
           </div>
+          <div class="lk-home-bar"></div>
         </div>
 
         <!-- ══ PERFORMANCE ══ -->
@@ -1354,6 +1376,53 @@
         if (id === "s-perf") renderPerf();
       }
 
+      function setupLockGestures() {
+        ["s-pin", "s-patron", "s-password"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+
+          let startY = 0;
+          let startX = 0;
+          let active = false;
+
+          el.addEventListener(
+            "touchstart",
+            (e) => {
+              if (e.touches.length !== 2) return;
+              const t1 = e.touches[0];
+              const t2 = e.touches[1];
+              startY = (t1.clientY + t2.clientY) / 2;
+              startX = (t1.clientX + t2.clientX) / 2;
+              active = true;
+            },
+            { passive: true },
+          );
+
+          el.addEventListener(
+            "touchmove",
+            (e) => {
+              if (!active || e.touches.length !== 2) return;
+              const t1 = e.touches[0];
+              const t2 = e.touches[1];
+              const midY = (t1.clientY + t2.clientY) / 2;
+              const midX = (t1.clientX + t2.clientX) / 2;
+              const dy = midY - startY;
+              const dx = midX - startX;
+
+              if (dy > 70 && Math.abs(dy) > Math.abs(dx) * 1.2) {
+                go("s-home");
+                active = false;
+              }
+            },
+            { passive: true },
+          );
+
+          el.addEventListener("touchend", () => {
+            active = false;
+          });
+        });
+      }
+
       // ── CLOCK ─────────────────────────────────────────────
       function tick() {
         const n = new Date();
@@ -1390,6 +1459,7 @@
       }
       setInterval(tick, 1000);
       tick();
+      setupLockGestures();
 
       // ── CONFIG ────────────────────────────────────────────
       function onLT() {
@@ -1521,13 +1591,14 @@
           );
           g.appendChild(n);
         }
-        // size canvas
+        // size canvas (DPR-aware, reactivo a cuando la pantalla se hace visible)
         const wrap = document.querySelector(".pat-wrap");
-        const cv = document.getElementById("pat-cv");
-        const sz = wrap.getBoundingClientRect();
-        cv.width = sz.width || 220;
-        cv.height = sz.height || 220;
-        clearCv();
+        sizePatCanvas();
+        if (window.ResizeObserver && !wrap._roAttached) {
+          const ro = new ResizeObserver(() => sizePatCanvas());
+          ro.observe(wrap);
+          wrap._roAttached = true;
+        }
         g.addEventListener("mouseup", patEnd);
         g.addEventListener("touchend", patEnd);
         g.addEventListener("mousemove", (e) => {
@@ -1570,6 +1641,21 @@
         setTimeout(checkPatron, 280);
       }
 
+      function sizePatCanvas() {
+        const wrap = document.querySelector(".pat-wrap");
+        const cv = document.getElementById("pat-cv");
+        if (!wrap || !cv) return;
+        const rect = wrap.getBoundingClientRect();
+        const w = rect.width || 220;
+        const h = rect.height || 220;
+        const dpr = window.devicePixelRatio || 1;
+        cv.width = Math.round(w * dpr);
+        cv.height = Math.round(h * dpr);
+        const ctx = cv.getContext("2d");
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        drawLines();
+      }
+
       function getCenter(id) {
         const n = document.getElementById("pn" + id);
         const g = document.getElementById("pat-grid");
@@ -1584,7 +1670,11 @@
       function drawLines() {
         const cv = document.getElementById("pat-cv");
         const ctx = cv.getContext("2d");
+        const dpr = window.devicePixelRatio || 1;
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, cv.width, cv.height);
+        ctx.restore();
         if (S.patNow.length < 2) return;
         ctx.strokeStyle = "rgba(0,245,212,.55)";
         ctx.lineWidth = 2;
@@ -1602,7 +1692,11 @@
       function clearCv() {
         const cv = document.getElementById("pat-cv");
         if (!cv) return;
-        cv.getContext("2d").clearRect(0, 0, cv.width, cv.height);
+        const ctx = cv.getContext("2d");
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        ctx.restore();
       }
 
       function checkPatron() {
